@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Box-Shadow Generator</title>
+</head>
+<style>
+	*{
+		font-family: sans-serif;
+		padding: 0;
+		top: 10px;
+		margin: 0;
+	}
+	.main_h{
+		position: relative;	
+		padding-bottom: 25px;
+		background: none;	
+		width: 50%;
+		height: 600px;
+		box-shadow: 0px 2px 3px rgba(0,0,0,0.23);
+	}
+	.box_h{
+		position: relative;
+		padding: 3px;
+		border-radius: 3px;
+		background: none;
+		width: 40%;
+		border: 2px solid rgba(123,123,123,0.23);
+	}
+	.expi_b{
+		position: relative;
+		padding: 5px;
+		background: none;
+		top: 0;
+		box-shadow: 0px 1px 2px 3px rgba(0,0,0,0.23);
+		height: calc(170px - 5px);
+		width: calc(100% - 5px);
+	}
+	.main_h .change_h{
+		position: relative;
+		padding: 15px;
+		background: none;	
+		width: 80%;
+		border-radius: 5px;
+		margin-top: 10px;
+		box-shadow: 0px 1px 12px 8px rgba(0,0,0,0.23);
+	}
+	.main_h .change_h .inputs{
+		position: relative;
+		display: inline-block;
+		padding: 7px;	
+		width: 220px;
+		left: -15px;
+		margin-top: 20px;
+		margin-left: 20px;
+		top: -15px;
+		border-radius: 3px;
+		box-shadow: 0px 1px 2px 3px rgba(0,0,0,0.23);
+	}
+	.elem{
+		position: relative;
+		border: none;
+		border-radius: 30px;
+		left: -2px;
+		box-shadow: 0px 1px 2px 3px rgba(0,0,0,0.23);
+		padding: 12px;
+		font-size: 18px;
+	}
+	:focus{
+		outline: none;
+
+	}
+	label{
+		position: relative;
+		font-size: 18px;
+	}
+	p{
+		position: relative;
+		top: -5px;
+		left: 10px;
+
+	}
+	b{
+		position: relative;
+		top: 15px;
+		left: -150px;
+	}
+	.cpy{
+		position: relative;
+		top: 20px;
+		box-shadow: 0px 19px 81px -10px #111;
+		width: 500px;
+		height: 50px;
+	}
+	#cpy_btn{
+		position: relative;
+		border: none;
+		padding: 8px;
+		background-color: #1a8cff;
+		top: 10px;
+		left: 110px;
+		cursor: pointer;
+		border-radius: 5px;
+		box-shadow: 1px 1px 14px 2px #1a8cff;
+	}
+	.tooltip{
+		background-color: #000;
+		padding: 8px;
+		border-radius: 3px;
+		position: absolute;
+		color: #fff;
+		opacity: 0;
+		font-size: 12px;
+		font-weight: bold;
+		transition: all 0.8s;
+		top: -40px;
+		left: 0px;
+	}
+	#cpy_btn:hover .tooltip{
+		opacity: 1;
+	}
+	#cpy_cont{
+		position: relative;
+		top: 10px;
+		width: 210px;
+	}
+</style>
+<body>
+
+<center>
+
+<div class="main_h">
+	<div class="box_h">
+		<div class="expi_b"></div>
+	</div>
+	<div class="change_h">
+		<div class="inputs">
+			<label>X</label>
+			<input type="number" id="x_c" value="0" class="elem">
+		</div>
+		<div class="inputs">
+			<label>Y</label>
+			<input type="number" id="y_c" value="0" class="elem">
+		</div>
+		<div class="inputs">
+			<label>Blur</label>
+			<input type="number" id="blur" value="0" class="elem">
+		</div>
+		<div class="inputs">
+			<label>Spread</label>
+			<input type="number" id="spread" value="0" class="elem">
+		</div>
+		<div class="inputs">
+			<label>Color</label>
+			<input type="text" id="color" maxlength="6" class="elem">
+		</div>
+		<div class="inputs">
+			<label>Radius</label>
+			<input type="number" id="border_radius" class="elem">
+		</div>
+	</div>
+	<div class="cpy">
+		<input type="text" id="cpy_cont" value="box-shadow: 0px 0px 0px 0px #000;">
+		<button id="cpy_btn">Copy<div class="tooltip" id="tooltip">Copy</div></button>
+		
+	</div>
+</div>
+
+</center>
+
+<script>
+	var x = document.getElementById('x_c');
+	var y = document.getElementById('y_c');
+	var blur = document.getElementById('blur');
+	var spread = document.getElementById('spread');
+	var color = document.getElementById('color');
+	var br = document.getElementById('border_radius');
+	var cpy = document.getElementById('cpy_cont');
+	var btn = document.getElementById('cpy_btn');
+	var expi = document.getElementsByClassName('expi_b')[0];
+	var ins = document.querySelectorAll("input");
+
+	for (var i = 0; i < ins.length; i++) {
+		ins[i].onkeyup = function() {
+			expi.setAttribute("style", "box-shadow: "+x.value+"px "+y.value+"px "+blur.value+"px "+spread.value+"px " + " #"+color.value+";border-radius: " + br.value+"px"+";");
+			cpy.value = x.value+"px "+y.value+"px "+blur.value+"px "+spread.value+"px "+ " #"+color.value+";";
+		};
+	}
+
+	btn.onclick = function() {
+		cpy.select();
+		document.execCommand("copy");
+		document.getElementById("tooltip").innerText = "Copied";
+	}
+
+
+</script>
+
+</body>
+</html>
